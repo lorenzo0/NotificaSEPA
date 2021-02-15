@@ -1,0 +1,71 @@
+{
+	"host": "localhost",
+	"oauth": {
+		"enable": false
+	},
+	"sparql11protocol": {
+		"protocol": "http",
+		"port": 8000,
+		"query": {
+			"path": "/query",
+			"method": "POST",
+			"format": "JSON"
+		},
+		"update": {
+			"path": "/update",
+			"method": "POST",
+			"format": "JSON"
+		}
+	},
+	"sparql11seprotocol": {
+		"protocol": "ws",
+		"reconnect" : true,
+		"availableProtocols": {
+			"ws": {
+				"port": 9000,
+				"path": "/subscribe"
+			},
+			"wss": {
+				"port": 9443,
+				"path": "/secure/subscribe"
+			}
+		}
+	},
+	"extended": {
+		"type": "basic",
+		"base": 0,
+		"clients": 10,
+		"messages": 10
+	},
+	"graphs": {
+
+	},
+	"namespaces": {
+		"schema": "http://schema.org/",
+		"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+		"sosa": "http://www.w3.org/ns/sosa/",
+		"qudt": "http://qudt.org/schema/qudt#"
+	},
+	"updates": {
+		"UPDATEVALUE": {
+            "forcedBindings": {
+                   "observation": {
+                          "type": "uri",
+                          "value": "http://prova"
+                   },
+
+                   "waterLevel": {
+                          "type": "literal",
+                          "datatype": "xs:integer",
+                          "value": "0"
+                   }
+               },
+            "sparql": "WITH <http://wot.arces.unibo.it/observation> DELETE { ?quantity qudt:numericValue ?oldWaterLevel . ?observation sosa:resultTime ?oldTime } INSERT { ?quantity qudt:numericValue ?waterLevel . ?observation sosa:resultTime ?timestamp } WHERE {BIND(now() AS ?timestamp) . ?observation rdf:type sosa:Observation ; sosa:hasResult ?quantity . OPTIONAL { ?observation sosa:resultTime ?oldTime . ?quantity qudt:numericValue ?oldWaterLevel}}"
+        }
+	},
+	"queries": {
+		"PLUVIOMETERS":{
+			"sparql": "SELECT ?observation  ?value ?timestamp FROM <http://wot.arces.unibo.it/observation> WHERE {VALUES ?observation {<http://swamp-project.org/observation/cbec/013-R24H><http://swamp-project.org/observation/cbec/003-R24H><http://swamp-project.org/observation/cbec/005-R24H>} ?observation rdf:type sosa:Observation ; sosa:resultTime ?timestamp . ?quantity qudt:numericValue ?value }"
+        }
+	}
+}
