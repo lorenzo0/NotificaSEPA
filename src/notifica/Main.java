@@ -12,7 +12,7 @@ public class Main {
 	public static void main(String[] args) throws SEPASecurityException, SEPAPropertiesException, SEPAProtocolException, SEPABindingsException {
 		
 		JSAPProvider jsap = new JSAPProvider();
-		AggregatorNotifica aggregator = new AggregatorNotifica(jsap.getJsap(), "PLUVIOMETERS", "UPDATEVALUE", jsap.getSecurityManager());
+		AggregatorNotifica aggregator = new AggregatorNotifica(jsap.getJsap(), "PLUVIOMETERS", "UPDATEWATERLEVEL", jsap.getSecurityManager());
 		
 		aggregator.subscribe();
 		System.out.println("Aggregator is waiting....");

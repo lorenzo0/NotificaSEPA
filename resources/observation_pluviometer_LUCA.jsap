@@ -45,8 +45,7 @@
 		"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
 		"sosa": "http://www.w3.org/ns/sosa/",
 		"qudt": "http://qudt.org/schema/qudt#",
-        "xs": "http://www.w3.org/2001/XMLSchema#",
-        "unit": "http://qudt.org/vocab/unit#"
+        "xs": "http://www.w3.org/2001/XMLSchema#"
 	},
 	"updates": {
 		"ADD_PLACE": {
@@ -103,35 +102,18 @@
 					"type": "uri",
 					"value": "http://prova"
 				},
-				"value": {
-					"type": "literal",
-					"datatype": "xs:integer",
-					"value": "0"
-				}
-			},
-			"sparql": "WITH <http://wot.arces.unibo.it/observation> DELETE { ?quantity qudt:numericValue ?oldValue . ?observation sosa:resultTime ?oldTime } INSERT { ?quantity qudt:numericValue ?value . ?observation sosa:resultTime ?timestamp } WHERE {BIND(now() AS ?timestamp) . ?observation rdf:type sosa:Observation ; sosa:hasResult ?quantity . OPTIONAL { ?observation sosa:resultTime ?oldTime . ?quantity qudt:numericValue ?oldValue}}"
-		},
-        "UPDATEWATERLEVEL": {
-			"forcedBindings": {
-				"observation": {
-					"type": "uri",
-					"value": "http://prova"
-				},
 				"waterLevel": {
 					"type": "literal",
 					"datatype": "xs:integer",
 					"value": "0"
 				}
 			},
-			"sparql": "WITH <http://wot.arces.unibo.it/observation> DELETE { ?quantity qudt:QuantityValue ?oldWaterLevel . ?observation sosa:resultTime ?oldTime } INSERT { ?quantity qudt:QuantityValue ?waterLevel . ?observation sosa:resultTime ?timestamp } WHERE {BIND(now() AS ?timestamp) . ?observation rdf:type sosa:Observation ; sosa:hasResult ?quantity . OPTIONAL { ?observation sosa:resultTime ?oldTime . ?quantity qudt:QuantityValue ?oldWaterLevel}}"
+			"sparql": "WITH <http://wot.arces.unibo.it/observation> DELETE { ?quantity qudt:numericValue ?oldWaterLevel . ?observation sosa:resultTime ?oldTime } INSERT { ?quantity qudt:numericValue ?waterLevel . ?observation sosa:resultTime ?timestamp } WHERE {BIND(now() AS ?timestamp) . ?observation rdf:type sosa:Observation ; sosa:hasResult ?quantity . OPTIONAL { ?observation sosa:resultTime ?oldTime . ?quantity qudt:numericValue ?oldWaterLevel}}"
 		}
 	},
 	"queries": {
 		"PLUVIOMETERS": {
-			"sparql": "SELECT ?observation  ?value ?timestamp FROM <http://wot.arces.unibo.it/observation> WHERE {VALUES ?observation {<http://valorePluv1> <http://valorePluv2> <http://valorePluv3>} ?observation rdf:type sosa:Observation ; sosa:resultTime ?timestamp . ?quantity qudt:numericValue ?value }"
-		},
-        "PLUVIOMETERSWITHWATERLEVEL": {
-			"sparql": "SELECT ?observation  ?value ?timestamp ?waterLevel FROM <http://wot.arces.unibo.it/observation> WHERE {VALUES ?observation {<http://valorePluv1> <http://pluv2> <http://pluv3>} ?observation rdf:type sosa:Observation ; sosa:resultTime ?timestamp . ?quantity qudt:numericValue ?value . ?quantityWL qudt:QuantityValue ?waterLevel }"
+			"sparql": "SELECT ?observation  ?value ?timestamp FROM <http://wot.arces.unibo.it/observation> WHERE {VALUES ?observation {<http://swamp-project.org/observation/cbec/013-R24H> <http://swamp-project.org/observation/cbec/003-R24H> <http://swamp-project.org/observation/cbec/005-R24H>} ?observation rdf:type sosa:Observation ; sosa:resultTime ?timestamp . ?quantity qudt:numericValue ?value }"
 		}
 	}
 }
