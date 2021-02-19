@@ -109,10 +109,7 @@
 					"value": "0"
 				}
 			},
-			"sparql": "WITH <http://wot.arces.unibo.it/observation> 
-            DELETE { ?quantity qudt:numericValue ?oldValue . ?observation sosa:resultTime ?oldTime } 
-            INSERT { ?quantity qudt:numericValue ?value . ?observation sosa:resultTime ?timestamp } 
-            WHERE {BIND(now() AS ?timestamp) . ?observation rdf:type sosa:Observation ; sosa:hasResult ?quantity . OPTIONAL { ?observation sosa:resultTime ?oldTime . ?quantity qudt:numericValue ?oldValue}}"
+			"sparql": "WITH <http://wot.arces.unibo.it/observation> DELETE { ?quantity qudt:numericValue ?oldValue . ?observation sosa:resultTime ?oldTime } INSERT { ?quantity qudt:numericValue ?value . ?observation sosa:resultTime ?timestamp } WHERE {BIND(now() AS ?timestamp) . ?observation rdf:type sosa:Observation ; sosa:hasResult ?quantity . OPTIONAL { ?observation sosa:resultTime ?oldTime . ?quantity qudt:numericValue ?oldValue}}"
 		},
         "UPDATEWATERLEVEL": {
 			"forcedBindings": {
@@ -131,7 +128,10 @@
 	},
 	"queries": {
 		"PLUVIOMETERS": {
-			"sparql": "SELECT ?observation  ?value ?timestamp ?waterLevel FROM <http://wot.arces.unibo.it/observation> WHERE {VALUES ?observation {<http://valorePluv1> <http://pluv2> <http://pluv3>} ?observation rdf:type sosa:Observation ; sosa:resultTime ?timestamp . ?quantity qudt:numericValue ?value ; qudt:QuantityValue ?waterLevel }"
+			"sparql": "SELECT ?observation  ?value ?timestamp FROM <http://wot.arces.unibo.it/observation> WHERE {VALUES ?observation {<http://valorePluv1> <http://valorePluv2> <http://valorePluv3>} ?observation rdf:type sosa:Observation ; sosa:resultTime ?timestamp . ?quantity qudt:numericValue ?value }"
+		},
+        "PLUVIOMETERSWITHWATERLEVEL": {
+			"sparql": "SELECT ?observation  ?value ?timestamp ?waterLevel FROM <http://wot.arces.unibo.it/observation> WHERE {VALUES ?observation {<http://valorePluv1> <http://pluv2> <http://pluv3>} ?observation rdf:type sosa:Observation ; sosa:resultTime ?timestamp . ?quantity qudt:numericValue ?value . ?quantityWL qudt:QuantityValue ?waterLevel }"
 		}
 	}
 }
