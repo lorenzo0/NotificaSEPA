@@ -24,8 +24,7 @@ class ConsumerNotifica extends Consumer {
 	
 	public ConsumerNotifica()
 			throws SEPAProtocolException, SEPASecurityException, SEPAPropertiesException {
-		super(new JSAPProvider().getJsap(), "PLUVIOMETERS", new JSAPProvider().getSecurityManager());
-		
+		super(new JSAPProvider().getJsap(), "PLUVIOMETERSWITHWATERLEVEL", new JSAPProvider().getSecurityManager());
 	}
 
 	
@@ -34,7 +33,7 @@ class ConsumerNotifica extends Consumer {
 		super.onAddedResults(results);
 
 		for (Bindings bindings : results.getBindings()) {
-			System.out.println("[CONSUMER] - Received new value(s): " +bindings.getValue("value") + " for: " +bindings.getValue("observation"));
+			System.out.println("[CONSUMER] - Received new value(s): " +bindings.getValue("waterLevel") + " for: " +bindings.getValue("observation"));
 		}
 	}
 	

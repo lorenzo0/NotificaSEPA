@@ -24,7 +24,7 @@ public class Main {
 		consumer = new ConsumerNotifica();
 		Random rand = new Random(); 
 		
-		System.out.println("Producer subscribed succesfully!");
+		System.out.println("Producer it's here!");
 		
 		System.out.println("Aggregator is subscribing...");
 		aggregator.subscribe();
@@ -34,9 +34,12 @@ public class Main {
 		consumer.subscribe();
 		System.out.println("Consumer subscribed succesfully!");
 		
+		producer.sendValue("http://valorePluv1", Integer.toString(rand.nextInt(100)));
+		producer.sendValue("http://valorePluv1", Integer.toString(rand.nextInt(100)));
+		
 		do {
 			try {
-				producer.sendValue("http://valorePluv1", Integer.toString(rand.nextInt(100)));
+				//producer.sendValue("http://valorePluv1", Integer.toString(rand.nextInt(100)));
 				Thread.sleep(5000);
 			} catch (InterruptedException e1) {
 				return;
