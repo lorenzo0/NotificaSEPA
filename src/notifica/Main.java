@@ -13,6 +13,7 @@ public class Main {
 	static JSAPProvider jsap;
 	static AggregatorNotifica aggregator;
 	static ProducerNotifica producer;
+	static ConsumerNotifica consumer;
 	
 
 	public static void main(String[] args) throws SEPASecurityException, SEPAPropertiesException, SEPAProtocolException, SEPABindingsException {
@@ -20,14 +21,18 @@ public class Main {
 		jsap = new JSAPProvider();
 		aggregator = new AggregatorNotifica();
 		producer = new ProducerNotifica();
+		consumer = new ConsumerNotifica();
 		Random rand = new Random(); 
 		
+		System.out.println("Producer subscribed succesfully!");
 		
 		System.out.println("Aggregator is subscribing...");
 		aggregator.subscribe();
 		System.out.println("Aggregator subscribed succesfully!");
 		
-		//todo - consumer
+		System.out.println("Consumer is subscribing...");
+		consumer.subscribe();
+		System.out.println("Consumer subscribed succesfully!");
 		
 		do {
 			try {
