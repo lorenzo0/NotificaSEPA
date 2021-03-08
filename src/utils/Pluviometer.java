@@ -1,4 +1,4 @@
-package notifica;
+package utils;
 
 import java.util.HashMap;
 
@@ -19,9 +19,10 @@ public class Pluviometer {
 	}
 	
 	public int getNewWaterValue() {
-		if(oldValue!=0)	hourValue = value + oldValue; else return -1;
-		
-		System.out.println("Old: " +oldValue + " - Actual: " +value);
+		if(oldValue!=0) {
+			hourValue = value + oldValue;
+			this.oldValue = value;
+		}else return -1;
 		
 		if(hourValue<2)	return 0;
 		else if(hourValue>=2 && hourValue<4) return 1;
@@ -34,7 +35,6 @@ public class Pluviometer {
 	}
 	
 	public void updateValues(double newValue, String newTimeStamp) {
-		this.oldValue = value;
 		this.value = newValue;
 		this.timeStamp = newTimeStamp;
 	}
