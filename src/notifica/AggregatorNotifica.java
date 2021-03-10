@@ -36,8 +36,8 @@ class AggregatorNotifica extends Aggregator {
 		
 		map = new HashMap<>();
 		map.put("http://valorePluv1", "http://pluv1");
-		//map.put("http://valorePluv2", "http://pluv2");
-		//map.put("http://valorePluv3", "http://pluv3");
+		map.put("http://valorePluv2", "http://pluv2");
+		map.put("http://valorePluv3", "http://pluv3");
 	}
 
 	
