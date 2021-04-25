@@ -35,9 +35,9 @@ class AggregatorNotifica extends Aggregator {
 		waterLevel=0;
 		
 		map = new HashMap<>();
-		map.put("http://valorePluv1", "http://pluv1");
-		map.put("http://valorePluv2", "http://pluv2");
-		map.put("http://valorePluv3", "http://pluv3");
+		map.put("http://swamp-project.org/observation/cbec/013-R24H", "featureOfInterest"); //Correggio
+		map.put("http://swamp-project.org/observation/cbec/003-R24H", "featureOfInterest"); //Santa Maria
+		map.put("http://swamp-project.org/observation/cbec/005-R24H", "featureOfInterest"); //Rotte
 	}
 
 	
@@ -47,11 +47,6 @@ class AggregatorNotifica extends Aggregator {
 
 		for (Bindings bindings : results.getBindings()) {
 			System.out.println("[AGGREGATOR] - Received new value(s): " +bindings.getValue("value") + " for: " +bindings.getValue("observation"));
-		
-			/*logger.debug("New pluviometer data with uri: " + bindings.getValue("observation"));
-			System.out.println("Observation: " +bindings.getValue("observation"));
-			System.out.println("Value: " +bindings.getValue("value"));
-			System.out.println("Timestamp: " +bindings.getValue("timestamp"));*/
 			
 			for(int i=0; i<pluviometers.size(); i++) {
 				if(pluviometers.get(i).getObservation().equals(bindings.getValue("observation")))

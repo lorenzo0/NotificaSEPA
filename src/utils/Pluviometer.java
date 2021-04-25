@@ -15,11 +15,11 @@ public class Pluviometer {
 		this.observation = observation;
 		this.value = value;
 		this.timeStamp = timeStamp;
-		oldValue = 0;
+		oldValue = -1;
 	}
 	
 	public int getNewWaterValue() {
-		if(oldValue!=0) hourValue = value + oldValue; else return -1;
+		if(oldValue!=-1) hourValue = value + oldValue; else return -1;
 		
 		if(hourValue<2)	return 0;
 		else if(hourValue>=2 && hourValue<4) return 1;
