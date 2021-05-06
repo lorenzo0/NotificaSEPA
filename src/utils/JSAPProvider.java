@@ -19,7 +19,7 @@ public class JSAPProvider {
 	private final long nRetry = 0;
 
 	public JSAPProvider() throws SEPAPropertiesException, SEPASecurityException {
-		String jsapFileName = "observation_pluviometer.jsap";
+		String jsapFileName = "observation_pluviometer-mml.jsap";
 
 		String path = getClass().getClassLoader().getResource(jsapFileName).getPath();
 		File f = new File(path);
