@@ -6,6 +6,7 @@ import it.unibo.arces.wot.sepa.commons.exceptions.SEPABindingsException;
 import it.unibo.arces.wot.sepa.commons.exceptions.SEPAPropertiesException;
 import it.unibo.arces.wot.sepa.commons.exceptions.SEPAProtocolException;
 import it.unibo.arces.wot.sepa.commons.exceptions.SEPASecurityException;
+import preparation.ProducerPreparation;
 import utils.JSAPProvider;
 
 public class Main {
@@ -14,6 +15,7 @@ public class Main {
 	static JSAPProvider jsap;
 	static AggregatorNotifica aggregator;
 	static ConsumerNotifica consumer;
+	static ProducerPreparation producerPreparation;
 	
 
 	public static void main(String[] args) throws SEPASecurityException, SEPAPropertiesException, SEPAProtocolException, SEPABindingsException {
@@ -22,7 +24,12 @@ public class Main {
 		jsap = new JSAPProvider();
 		aggregator = new AggregatorNotifica();
 		consumer = new ConsumerNotifica();
+		producerPreparation = new ProducerPreparation();
 
+		//definition of the new observation for water level
+		addingObservation(producerPreparation);
+		
+		//subscription of aggregator and consumer
 		populationSystem(aggregator, consumer);
 		
 		do {
@@ -42,6 +49,14 @@ public class Main {
 		}
 		
 		System.out.println("[POPULATION] Aggregator, producer and consumer subscribed succesfully!");		
+	}
+	
+	static void addingObservation(ProducerPreparation PP) {
+		PP.createObservation("http://wot.arces.unibo.it/monitor#PluviometroCorreggio>", "http://wot.arces.unibo.it/waterLevelCorreggio", "unit:DegreeCelsius", "-1");
+		PP.createObservation("http://wot.arces.unibo.it/monitor#PluviometroRotte", "http://wot.arces.unibo.it/waterLevelRotte", "unit:DegreeCelsius", "-1");
+		PP.createObservation("http://wot.arces.unibo.it/monitor#PluviometroSantaMaria", "http://wot.arces.unibo.it/waterLevelSantaMaria", "unit:DegreeCelsius", "-1");
+		
+		System.out.println("[PREPARATION] New  water level's observations created succesfully!");		
 	}
 	
 }

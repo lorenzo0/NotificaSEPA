@@ -163,7 +163,8 @@
 			"sparql": "SELECT ?observation  ?value ?timestamp FROM <http://swamp-project.org/observation/cbec> WHERE { VALUES ?observation {<http://swamp-project.org/observation/cbec/013-R24H> <http://swamp-project.org/observation/cbec/005-R24H> <http://swamp-project.org/observation/cbec/003-R24H>} ?observation rdf:type sosa:Observation ; sosa:hasResult ?quantity . OPTIONAL{ ?observation sosa:resultTime ?timestamp } . ?quantity qudt:numericValue ?value}"
 		},
         "PLUVIOMETERSWITHWATERLEVEL": {
-			"sparql": "SELECT ?observation ?timestamp ?waterLevel FROM <http://wot.arces.unibo.it/observation> WHERE {VALUES ?observation {<http://pluv1> <http://pluv2> <http://pluv3>} ?observation rdf:type sosa:Observation ; sosa:hasResult ?quantity ; sosa:resultTime ?timestamp . ?quantity qudt:QuantityValue ?waterLevel }"
+			"sparql": "SELECT ?observation ?timestamp ?waterLevel FROM <http://wot.arces.unibo.it/observation> WHERE {VALUES ?observation {<http://wot.arces.unibo.it/monitor#PluviometroCorreggio> <http://wot.arces.unibo.it/monitor#PluviometroRotte> <http://wot.arces.unibo.it/monitor#PluviometroSantaMaria>} ?observation rdf:type sosa:Observation ; sosa:hasResult ?quantity ; sosa:resultTime ?timestamp . ?quantity qudt:QuantityValue ?waterLevel }"
 		}
+		
 	}
 }

@@ -35,9 +35,9 @@ class AggregatorNotifica extends Aggregator {
 		waterLevel=0;
 		
 		map = new HashMap<>();
-		map.put("http://swamp-project.org/observation/cbec/013-R24H", "http://wot.arces.unibo.it/monitor#PluviometroCorreggio"); //Correggio
-		map.put("http://swamp-project.org/observation/cbec/003-R24H", "http://wot.arces.unibo.it/monitor#PluviometroSantaMaria"); //Santa Maria
-		map.put("http://swamp-project.org/observation/cbec/005-R24H", "http://wot.arces.unibo.it/monitor#PluviometroRotte"); //Rotte
+		map.put("http://swamp-project.org/observation/cbec/013-R24H", "http://wot.arces.unibo.it/waterLevelCorreggio"); //Correggio
+		map.put("http://swamp-project.org/observation/cbec/003-R24H", "http://wot.arces.unibo.it/waterLevelSantaMaria"); //Santa Maria
+		map.put("http://swamp-project.org/observation/cbec/005-R24H", "http://wot.arces.unibo.it/waterLevelRotte"); //Rotte
 	}
 
 	
@@ -65,7 +65,7 @@ class AggregatorNotifica extends Aggregator {
 				waterLevel = pluviometers.get(pluviometers.indexOf(p1)).getNewWaterValue();
 			}
 			
-			System.out.println("[SIMULATOR WATER LEVEL] - " + waterLevel + " for: " +bindings.getValue("observation"));
+			System.out.println("[SIMULATOR WATER LEVEL] - " + waterLevel + " for: " +bindings.getValue("observation") + " to: "+map.get(bindings.getValue("observation")));
 			
 			
 			/*int retry = 5;
