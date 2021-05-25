@@ -157,10 +157,10 @@
 	},
 	"queries": {
 		"PLUVIOMETERS": {
-			"sparql": "SELECT ?observation  ?value ?timestamp FROM <http://wot.arces.unibo.it/observation> WHERE { VALUES ?observation {<http://swamp-project.org/observation/cbec/013-R24H> <http://swamp-project.org/observation/cbec/005-R24H> <http://swamp-project.org/observation/cbec/003-R24H>} ?observation rdf:type sosa:Observation ; sosa:hasResult ?quantity . OPTIONAL{ ?observation sosa:resultTime ?timestamp } . ?quantity qudt:numericValue ?value}"
+			"sparql": "SELECT ?observation ?value ?timestamp FROM <http://swamp-project.org/observation/cbec> WHERE {VALUES ?observation {<http://swamp-project.org/observation/cbec/013-R24H> <http://swamp-project.org/observation/cbec/003-R24H> <http://swamp-project.org/observation/cbec/005-R24H>} ?observation rdf:type sosa:Observation ; sosa:hasResult ?quantity . ?quantity qudt:numericValue ?value . OPTIONAL {?observation sosa:resultTime ?timestamp}}"
 		},
         "PLUVIOMETERSWITHWATERLEVEL": {
-			"sparql": "SELECT ?observation ?timestamp ?waterLevel FROM <http://wot.arces.unibo.it/observation> WHERE {VALUES ?observation {<http://wot.arces.unibo.it/monitor#PluviometroCorreggio> <http://wot.arces.unibo.it/monitor#PluviometroRotte> <http://wot.arces.unibo.it/monitor#PluviometroSantaMaria>} ?observation rdf:type sosa:Observation ; sosa:hasResult ?quantity ; sosa:resultTime ?timestamp . ?quantity qudt:QuantityValue ?waterLevel }"
+			"sparql": "SELECT ?observation ?value ?timestamp FROM <http://wot.arces.unibo.it/observation/2021> WHERE {VALUES ?observation {<http://wot.arces.unibo.it/monitor#PluviometroCorreggio> <http://wot.arces.unibo.it/monitor#PluviometroRotte> <http://wot.arces.unibo.it/monitor#PluviometroSantaMaria>} . ?quantity qudt:numericValue ?value . OPTIONAL {?observation sosa:resultTime ?timestamp}}"
 		}
 	}
 }

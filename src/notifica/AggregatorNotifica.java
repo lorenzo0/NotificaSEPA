@@ -65,7 +65,7 @@ class AggregatorNotifica extends Aggregator {
 				waterLevel = pluviometers.get(pluviometers.indexOf(p1)).getNewWaterValue();
 			}
 			
-			System.out.println("[SIMULATOR WATER LEVEL] - " + waterLevel + " for: " +bindings.getValue("observation") + " to: "+map.get(bindings.getValue("observation")));
+			//System.out.println("[SIMULATOR WATER LEVEL] - " + waterLevel + " for: " +bindings.getValue("observation") + " to: "+map.get(bindings.getValue("observation")));
 			
 			
 			int retry = 5;

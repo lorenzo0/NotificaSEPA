@@ -63,7 +63,7 @@ public class Main {
 	}
 	
 	static void addingObservation(ProducerPreparation PP) {
-		PP.createObservation("http://wot.arces.unibo.it/monitor#PluviometroCorreggio>", "http://wot.arces.unibo.it/waterLevelCorreggio", "unit:Number", "-1");
+		PP.createObservation("http://wot.arces.unibo.it/monitor#PluviometroCorreggio", "http://wot.arces.unibo.it/waterLevelCorreggio", "unit:Number", "-1");
 		PP.createObservation("http://wot.arces.unibo.it/monitor#PluviometroRotte", "http://wot.arces.unibo.it/waterLevelRotte", "unit:Number", "-1");
 		PP.createObservation("http://wot.arces.unibo.it/monitor#PluviometroSantaMaria", "http://wot.arces.unibo.it/waterLevelSantaMaria", "unit:Number", "-1");
 		
