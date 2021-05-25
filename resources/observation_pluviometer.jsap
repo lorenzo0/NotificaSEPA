@@ -1,11 +1,13 @@
 {
-	"host": "localhost",
+	"host": "mml.arces.unibo.it",
 	"oauth": {
-		"enable": false
+		"enable": false,
+		"register": "https://localhost:8443/oauth/register",
+		"tokenRequest": "https://localhost:8443/oauth/token"
 	},
 	"sparql11protocol": {
 		"protocol": "http",
-		"port": 8000,
+		"port": 8666,
 		"query": {
 			"path": "/query",
 			"method": "POST",
@@ -18,11 +20,11 @@
 		}
 	},
 	"sparql11seprotocol": {
+		"reconnect" : true,
 		"protocol": "ws",
-		"reconnect": true,
 		"availableProtocols": {
 			"ws": {
-				"port": 9000,
+				"port": 9666,
 				"path": "/subscribe"
 			},
 			"wss": {
@@ -35,7 +37,12 @@
 		"type": "basic",
 		"base": 0,
 		"clients": 10,
-		"messages": 10
+		"messages": 10,
+		"pluviometers" : {
+			"uris": ["http://swamp-project.org/observation/cbec/013-R24H","http://swamp-project.org/observation/cbec/005-R24H","http://swamp-project.org/observation/cbec/003-R24H"],
+			"graph" : "http://swamp-project.org/observation/cbec"
+		},
+		"foi" : ["http://wot.arces.unibo.it/monitor#PluviometroCorreggio","http://wot.arces.unibo.it/monitor#PluviometroRotte","http://wot.arces.unibo.it/monitor#PluviometroSantaMaria"]
 	},
 	"graphs": {
 		
@@ -70,7 +77,7 @@
 					"value": "http://a.uri/Mars"
 				}
 			},
-			"sparql": "INSERT {GRAPH <http://wot.arces.unibo.it/context/2021> {?place rdf:type schema:Place; schema:name ?name ;  schema:GeoCoordinates _:coordinate . _:coordinate schema:latitude ?lat ; schema:longitude ?lon}} WHERE {}"
+			"sparql": "INSERT {GRAPH <http://wot.arces.unibo.it/context> {?place rdf:type schema:Place; schema:name ?name ;  schema:GeoCoordinates _:coordinate . _:coordinate schema:latitude ?lat ; schema:longitude ?lon}} WHERE {}"
 		},
 		"ADD_OBSERVATION": {
 			"forcedBindings": {
