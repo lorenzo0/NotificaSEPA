@@ -70,7 +70,7 @@
 					"value": "http://a.uri/Mars"
 				}
 			},
-			"sparql": "INSERT {GRAPH <http://wot.arces.unibo.it/context> {?place rdf:type schema:Place; schema:name ?name ;  schema:GeoCoordinates _:coordinate . _:coordinate schema:latitude ?lat ; schema:longitude ?lon}} WHERE {}"
+			"sparql": "INSERT {GRAPH <http://wot.arces.unibo.it/context/2021> {?place rdf:type schema:Place; schema:name ?name ;  schema:GeoCoordinates _:coordinate . _:coordinate schema:latitude ?lat ; schema:longitude ?lon}} WHERE {}"
 		},
 		"ADD_OBSERVATION": {
 			"forcedBindings": {
@@ -92,7 +92,7 @@
 					"value": "0"
 				}
 			},
-			"sparql": "INSERT {GRAPH <http://wot.arces.unibo.it/observation> {?observation rdf:type sosa:Observation ; sosa:hasFeatureOfInterest ?location ; sosa:hasResult _:quantity .  _:quantity rdf:type qudt:QuantityValue ; qudt:unit ?unit ; qudt:numericValue ?value}} WHERE {}"
+			"sparql": "INSERT {GRAPH <http://wot.arces.unibo.it/observation/2021> {?observation rdf:type sosa:Observation ; sosa:hasFeatureOfInterest ?location ; sosa:hasResult _:quantity .  _:quantity rdf:type qudt:QuantityValue ; qudt:unit ?unit ; qudt:numericValue ?value}} WHERE {}"
 		},
 		"ADD_PLUVIOMETER": {
 			"forcedBindings": {
@@ -128,7 +128,7 @@
 					"value": "0"
 				}
 			},
-			"sparql": "WITH <http://wot.arces.unibo.it/observation> DELETE { ?quantity qudt:numericValue ?oldValue . ?observation sosa:resultTime ?oldTime } INSERT { ?quantity qudt:numericValue ?value . ?observation sosa:resultTime ?timestamp } WHERE {BIND(now() AS ?timestamp) . ?observation rdf:type sosa:Observation ; sosa:hasResult ?quantity . ?quantity qudt:numericValue ?oldValue . OPTIONAL { ?observation sosa:resultTime ?oldTime}}"
+			"sparql": "WITH <http://wot.arces.unibo.it/observation/2021> DELETE { ?quantity qudt:numericValue ?oldValue . ?observation sosa:resultTime ?oldTime } INSERT { ?quantity qudt:numericValue ?value . ?observation sosa:resultTime ?timestamp } WHERE {BIND(now() AS ?timestamp) . ?observation rdf:type sosa:Observation ; sosa:hasResult ?quantity . ?quantity qudt:numericValue ?oldValue . OPTIONAL { ?observation sosa:resultTime ?oldTime}}"
 		},
         "UPDATEWATERLEVEL": {
 			"forcedBindings": {
@@ -142,10 +142,7 @@
 					"value": "0"
 				}
 			},
-			"sparql": "WITH <http://wot.arces.unibo.it/observation> DELETE { ?quantity qudt:QuantityValue ?oldWaterLevel . ?observation sosa:resultTime ?oldTime } INSERT { ?quantity qudt:QuantityValue ?waterLevel . ?observation sosa:resultTime ?timestamp } WHERE {BIND(now() AS ?timestamp) . ?observation rdf:type sosa:Observation ; sosa:hasResult ?quantity . OPTIONAL { ?observation sosa:resultTime ?oldTime . ?quantity qudt:QuantityValue ?oldWaterLevel}}"
-		},
-		"DELETE_ALL": {
-			"sparql": "DELETE WHERE { ?s ?p ?o }"
+			"sparql": "WITH <http://wot.arces.unibo.it/observation/2021> DELETE { ?quantity qudt:QuantityValue ?oldWaterLevel . ?observation sosa:resultTime ?oldTime } INSERT { ?quantity qudt:QuantityValue ?waterLevel . ?observation sosa:resultTime ?timestamp } WHERE {BIND(now() AS ?timestamp) . ?observation rdf:type sosa:Observation ; sosa:hasResult ?quantity . OPTIONAL { ?observation sosa:resultTime ?oldTime . ?quantity qudt:QuantityValue ?oldWaterLevel}}"
 		},
 		"SELECT_ALL": {
 			"sparql": "SELECT ?s ?o ?p FROM <http://wot.arces.unibo.it/observation> FROM <http://wot.arces.unibo.it/context> WHERE { ?s ?o ?p }"

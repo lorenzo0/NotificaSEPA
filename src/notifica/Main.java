@@ -27,7 +27,12 @@ public class Main {
 		producerPreparation = new ProducerPreparation();
 
 		//definition of the new observation for water level
-		addingObservation(producerPreparation);
+		for (int i=0; i < args.length ; i++) {
+			if (args[i].equals("-init")) {
+				addingObservation(producerPreparation);
+				break;
+			}
+		}
 		
 		//subscription of aggregator and consumer
 		populationSystem(aggregator, consumer);
