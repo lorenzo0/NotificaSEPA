@@ -35,7 +35,13 @@ public class Main {
 		}
 		
 		//subscription of aggregator and consumer
-		populationSystem(aggregator, consumer);
+		ConsumerNotifica test = null;
+		for (int i=0; i < args.length ; i++) {
+			if (args[i].equals("-consumer")) {
+				test = consumer;	
+			}
+		}
+		populationSystem(aggregator, test);
 		
 		do {
 			;
@@ -48,7 +54,7 @@ public class Main {
 		
 		try {
 			A.subscribe();
-			C.subscribe();
+			if (C != null) C.subscribe();
 		} catch (SEPASecurityException | SEPAPropertiesException | SEPAProtocolException | SEPABindingsException e) {
 			e.printStackTrace();
 		}
