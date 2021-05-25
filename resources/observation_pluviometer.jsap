@@ -52,7 +52,7 @@
 		"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
 		"sosa": "http://www.w3.org/ns/sosa/",
 		"qudt": "http://qudt.org/schema/qudt#",
-        "xs": "http://www.w3.org/2001/XMLSchema#",
+        "xsd": "http://www.w3.org/2001/XMLSchema#",
         "unit": "http://qudt.org/vocab/unit#"
 	},
 	"updates": {
@@ -95,7 +95,7 @@
 				},
 				"value": {
 					"type": "literal",
-					"datatype": "xs:integer",
+					"datatype": "xsd:integer",
 					"value": "0"
 				}
 			},
@@ -117,7 +117,7 @@
 				},
 				"waterLevel": {
 					"type": "literal",
-					"datatype": "xs:integer",
+					"datatype": "xsd:integer",
 					"value": "0"
 				}
 			},
@@ -131,7 +131,7 @@
 				},
 				"value": {
 					"type": "literal",
-					"datatype": "xs:integer",
+					"datatype": "xsd:integer",
 					"value": "0"
 				}
 			},
@@ -145,7 +145,7 @@
 				},
 				"waterLevel": {
 					"type": "literal",
-					"datatype": "xs:integer",
+					"datatype": "xsd:integer",
 					"value": "0"
 				}
 			},
@@ -157,10 +157,10 @@
 	},
 	"queries": {
 		"PLUVIOMETERS": {
-			"sparql": "SELECT ?observation  ?value ?timestamp FROM <http://wot.arces.unibo.it/observation> WHERE { VALUES ?observation {<http://valorePluv1> <http://valorePluv2> <http://valorePluv3>} ?observation rdf:type sosa:Observation ; sosa:hasResult ?quantity . OPTIONAL{ ?observation sosa:resultTime ?timestamp } . ?quantity qudt:numericValue ?value}"
+			"sparql": "SELECT ?observation  ?value ?timestamp FROM <http://wot.arces.unibo.it/observation> WHERE { VALUES ?observation {<http://swamp-project.org/observation/cbec/013-R24H> <http://swamp-project.org/observation/cbec/005-R24H> <http://swamp-project.org/observation/cbec/003-R24H>} ?observation rdf:type sosa:Observation ; sosa:hasResult ?quantity . OPTIONAL{ ?observation sosa:resultTime ?timestamp } . ?quantity qudt:numericValue ?value}"
 		},
         "PLUVIOMETERSWITHWATERLEVEL": {
-			"sparql": "SELECT ?observation ?timestamp ?waterLevel FROM <http://wot.arces.unibo.it/observation> WHERE {VALUES ?observation {<http://pluv1> <http://pluv2> <http://pluv3>} ?observation rdf:type sosa:Observation ; sosa:hasResult ?quantity ; sosa:resultTime ?timestamp . ?quantity qudt:QuantityValue ?waterLevel }"
+			"sparql": "SELECT ?observation ?timestamp ?waterLevel FROM <http://wot.arces.unibo.it/observation> WHERE {VALUES ?observation {<http://wot.arces.unibo.it/monitor#PluviometroCorreggio> <http://wot.arces.unibo.it/monitor#PluviometroRotte> <http://wot.arces.unibo.it/monitor#PluviometroSantaMaria>} ?observation rdf:type sosa:Observation ; sosa:hasResult ?quantity ; sosa:resultTime ?timestamp . ?quantity qudt:QuantityValue ?waterLevel }"
 		}
 	}
 }
