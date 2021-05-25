@@ -68,7 +68,7 @@ class AggregatorNotifica extends Aggregator {
 			System.out.println("[SIMULATOR WATER LEVEL] - " + waterLevel + " for: " +bindings.getValue("observation") + " to: "+map.get(bindings.getValue("observation")));
 			
 			
-			/*int retry = 5;
+			int retry = 5;
 			
 			try {
 				this.setUpdateBindingValue("observation", new RDFTermURI(map.get(bindings.getValue("observation"))));
@@ -90,7 +90,7 @@ class AggregatorNotifica extends Aggregator {
 				}
 				retry--;
 			}
-			if(!ret) System.out.println("[AGGREGATOR] - Failed updated water level(s)");*/
+			if(!ret) System.out.println("[AGGREGATOR] - Failed updated water level(s)");
 		}
 	}
 	
