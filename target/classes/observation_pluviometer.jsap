@@ -149,7 +149,11 @@
 					"value": "0"
 				}
 			},
-			"sparql": "WITH <http://wot.arces.unibo.it/observation/2021> DELETE { ?quantity qudt:QuantityValue ?oldWaterLevel . ?observation sosa:resultTime ?oldTime } INSERT { ?quantity qudt:QuantityValue ?waterLevel . ?observation sosa:resultTime ?timestamp } WHERE {BIND(now() AS ?timestamp) . ?observation rdf:type sosa:Observation ; sosa:hasResult ?quantity . OPTIONAL { ?observation sosa:resultTime ?oldTime . ?quantity qudt:QuantityValue ?oldWaterLevel}}"
+			"sparql": "WITH <http://wot.arces.unibo.it/observation/2021>
+					   DELETE { ?quantity qudt:numericValue ?oldWaterLevel . ?observation sosa:resultTime ?oldTime }
+					   INSERT { ?quantity qudt:numericValue ?waterLevel . ?observation sosa:resultTime ?timestamp }
+					   WHERE {BIND(now() AS ?timestamp) . ?observation rdf:type sosa:Observation ; sosa:hasResult ?quantity .
+					   		  OPTIONAL { ?observation sosa:resultTime ?oldTime . ?quantity qudt:QuantityValue ?oldWaterLevel}}"
 		},
 		"SELECT_ALL": {
 			"sparql": "SELECT ?s ?o ?p FROM <http://wot.arces.unibo.it/observation> FROM <http://wot.arces.unibo.it/context> WHERE { ?s ?o ?p }"
@@ -160,7 +164,7 @@
 			"sparql": "SELECT ?observation ?value ?timestamp FROM <http://swamp-project.org/observation/cbec> WHERE {VALUES ?observation {<http://swamp-project.org/observation/cbec/013-R24H> <http://swamp-project.org/observation/cbec/003-R24H> <http://swamp-project.org/observation/cbec/005-R24H>} ?observation rdf:type sosa:Observation ; sosa:hasResult ?quantity . ?quantity qudt:numericValue ?value . OPTIONAL {?observation sosa:resultTime ?timestamp}}"
 		},
         "PLUVIOMETERSWITHWATERLEVEL": {
-			"sparql": "SELECT ?observation ?value ?timestamp FROM <http://wot.arces.unibo.it/observation/2021> WHERE {VALUES ?observation {<http://wot.arces.unibo.it/monitor#PluviometroCorreggio> <http://wot.arces.unibo.it/monitor#PluviometroRotte> <http://wot.arces.unibo.it/monitor#PluviometroSantaMaria>} . ?quantity qudt:numericValue ?value . OPTIONAL {?observation sosa:resultTime ?timestamp}}"
+			"sparql": "SELECT ?observation ?value ?timestamp FROM <http://wot.arces.unibo.it/observation/2021> WHERE {VALUES ?observation {<http://wot.arces.unibo.it/waterLevelRotte> <http://wot.arces.unibo.it/waterLevelCorreggio> <http://wot.arces.unibo.it/waterLevelSantaMaria>} ?observation rdf:type sosa:Observation ; sosa:hasResult ?quantity . ?quantity qudt:numericValue ?value . OPTIONAL {?observation sosa:resultTime ?timestamp}}"
 		}
 	}
 }
