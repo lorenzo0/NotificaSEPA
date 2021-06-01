@@ -153,7 +153,7 @@
 					   DELETE { ?quantity qudt:numericValue ?oldWaterLevel . ?observation sosa:resultTime ?oldTime }
 					   INSERT { ?quantity qudt:numericValue ?waterLevel . ?observation sosa:resultTime ?timestamp }
 					   WHERE {BIND(now() AS ?timestamp) . ?observation rdf:type sosa:Observation ; sosa:hasResult ?quantity .
-					   		  OPTIONAL { ?observation sosa:resultTime ?oldTime . ?quantity qudt:QuantityValue ?oldWaterLevel}}"
+					   		  OPTIONAL { ?observation sosa:resultTime ?oldTime . ?quantity qudt:numericValue ?oldWaterLevel}}"
 		},
 		"SELECT_ALL": {
 			"sparql": "SELECT ?s ?o ?p FROM <http://wot.arces.unibo.it/observation> FROM <http://wot.arces.unibo.it/context> WHERE { ?s ?o ?p }"
