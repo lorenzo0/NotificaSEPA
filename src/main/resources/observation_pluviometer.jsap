@@ -53,6 +53,31 @@
 	},
 	"updates": {
 		"ADD_OBSERVATION": {
+			"sparql": "INSERT {GRAPH <http://wot.arces.unibo.it/observation/2021> {?observation rdf:type sosa:Observation ; rdfs:label ?label ; rdfs:comment ?comment ; sosa:hasFeatureOfInterest ?location ; sosa:hasResult _:quantity . _:quantity rdf:type qudt:QuantityValue ; qudt:unit ?unit ; qudt:numericValue 'NaN'}} WHERE {}",
+			"forcedBindings": {
+				"observation": {
+					"type": "uri",
+					"value": "http://a.uri/ObservationXYZ"
+				},
+				"comment": {
+					"type": "literal",
+					"value": "This is an observation"
+				},
+				"label": {
+					"type": "literal",
+					"value": "The observation XYZ"
+				},
+				"location": {
+					"type": "uri",
+					"value": "http://a.uri/Mars"
+				},
+				"unit": {
+					"type": "uri",
+					"value": "unit:DegreeCelsius"
+				}
+			}
+		},
+		"ADD_OBSERVATION_SBAGLIATA": {
 			"forcedBindings": {
 				"location": {
 					"type": "uri",

@@ -21,7 +21,7 @@ public class ProducerPreparation extends Producer {
 	}
 	
 
-	public boolean createObservation(String location, String observation, String unit, String value) {
+	public boolean createObservation(String location, String observation, String unit, String value,String label) {
 		logger.info("[CREATE OBSERVATION - PRODUCER] - Creating observation linked to features of interest...");
 
 		int retry = 5;
@@ -33,6 +33,7 @@ public class ProducerPreparation extends Producer {
 				this.setUpdateBindingValue("observation", new RDFTermURI(observation));
 				this.setUpdateBindingValue("unit", new RDFTermURI(unit));
 				this.setUpdateBindingValue("value", new RDFTermLiteral(value));
+				this.setUpdateBindingValue("label", new RDFTermLiteral(value));
 				
 				ret = update().isUpdateResponse();
 			} catch (SEPASecurityException | SEPAProtocolException | SEPAPropertiesException

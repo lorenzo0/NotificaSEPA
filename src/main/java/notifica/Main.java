@@ -65,9 +65,9 @@ public class Main {
 	}
 	
 	static void addingObservation(ProducerPreparation PP) {
-		PP.createObservation("http://wot.arces.unibo.it/monitor#PluviometroCorreggio>", "http://wot.arces.unibo.it/waterLevelCorreggio", "unit:Number", "-1");
-		PP.createObservation("http://wot.arces.unibo.it/monitor#PluviometroRotte", "http://wot.arces.unibo.it/waterLevelRotte", "unit:Number", "-1");
-		PP.createObservation("http://wot.arces.unibo.it/monitor#PluviometroSantaMaria", "http://wot.arces.unibo.it/waterLevelSantaMaria", "unit:Number", "-1");
+		PP.createObservation("http://wot.arces.unibo.it/monitor#PluviometroCorreggio>", "http://wot.arces.unibo.it/waterLevelCorreggio", "unit:Number", "-1","013-R24H (Grado di intensità)");
+		PP.createObservation("http://wot.arces.unibo.it/monitor#PluviometroRotte", "http://wot.arces.unibo.it/waterLevelRotte", "unit:Number", "-1","005-R24H (Grado di intensità)");
+		PP.createObservation("http://wot.arces.unibo.it/monitor#PluviometroSantaMaria", "http://wot.arces.unibo.it/waterLevelSantaMaria", "unit:Number", "-1","003-R24H (Grado di intensità)");
 		
 		logger.info("[PREPARATION] New  water level's observations created succesfully!");		
 	}
