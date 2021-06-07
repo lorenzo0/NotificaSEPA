@@ -1,0 +1,100 @@
+{
+	"host": "mml.arces.unibo.it",
+	"oauth": {
+		"enable": false,
+		"register": "https://localhost:8443/oauth/register",
+		"tokenRequest": "https://localhost:8443/oauth/token"
+	},
+	"sparql11protocol": {
+		"protocol": "http",
+		"port": 8666,
+		"query": {
+			"path": "/query",
+			"method": "POST",
+			"format": "JSON"
+		},
+		"update": {
+			"path": "/update",
+			"method": "POST",
+			"format": "JSON"
+		}
+	},
+	"sparql11seprotocol": {
+		"reconnect" : true,
+		"protocol": "ws",
+		"availableProtocols": {
+			"ws": {
+				"port": 9666,
+				"path": "/subscribe"
+			},
+			"wss": {
+				"port": 9443,
+				"path": "/secure/subscribe"
+			}
+		}
+	},
+	"extended": {
+		"pluviometers" : {
+			"uris": ["http://swamp-project.org/observation/cbec/013-R24H","http://swamp-project.org/observation/cbec/005-R24H","http://swamp-project.org/observation/cbec/003-R24H"],
+			"graph" : "http://swamp-project.org/observation/cbec"
+		},
+		"foi" : ["http://wot.arces.unibo.it/monitor#PluviometroCorreggio","http://wot.arces.unibo.it/monitor#PluviometroRotte","http://wot.arces.unibo.it/monitor#PluviometroSantaMaria"]
+	},
+	"graphs": {
+		
+	},
+	"namespaces": {
+		"schema": "http://schema.org/",
+		"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+		"sosa": "http://www.w3.org/ns/sosa/",
+		"qudt": "http://qudt.org/schema/qudt#",
+        "xsd": "http://www.w3.org/2001/XMLSchema#",
+        "unit": "http://qudt.org/vocab/unit#"
+	},
+	"updates": {
+		"ADD_OBSERVATION": {
+			"forcedBindings": {
+				"location": {
+					"type": "uri",
+					"value": "http://a.uri/Mars"
+				},
+				"observation": {
+					"type": "uri",
+					"value": "http://a.uri/ObservationXYZ"
+				},
+				"unit": {
+					"type": "uri",
+					"value": "unit:DegreeCelsius"
+				},
+				"value": {
+					"type": "literal",
+					"datatype": "xsd:integer",
+					"value": "0"
+				}
+			},
+			"sparql": "INSERT {GRAPH <http://wot.arces.unibo.it/observation/2021> {?observation rdf:type sosa:Observation ; sosa:hasFeatureOfInterest ?location ; sosa:hasResult _:quantity .  _:quantity rdf:type qudt:QuantityValue ; qudt:unit ?unit ; qudt:numericValue ?value}} WHERE {}"
+		},
+        "UPDATEWATERLEVEL": {
+			"forcedBindings": {
+				"observation": {
+					"type": "uri",
+					"value": "http://prova"
+				},
+				"waterLevel": {
+					"type": "literal",
+					"datatype": "xsd:integer",
+					"value": "0"
+				}
+			},
+			"sparql": "WITH <http://wot.arces.unibo.it/observation/2021> DELETE { ?quantity qudt:numericValue ?oldWaterLevel . ?observation sosa:resultTime ?oldTime } INSERT { ?quantity qudt:numericValue ?waterLevel . ?observation sosa:resultTime ?timestamp } WHERE {BIND(now() AS ?timestamp) . ?observation rdf:type sosa:Observation ; sosa:hasResult ?quantity . OPTIONAL { ?observation sosa:resultTime ?oldTime . ?quantity qudt:numericValue ?oldWaterLevel}}"
+		}
+	},
+	"queries": {
+		"PLUVIOMETERS": {
+			"sparql": "SELECT ?observation  ?value ?timestamp FROM <http://swamp-project.org/observation/cbec> WHERE { VALUES ?observation {<http://swamp-project.org/observation/cbec/013-R24H> <http://swamp-project.org/observation/cbec/005-R24H> <http://swamp-project.org/observation/cbec/003-R24H>} ?observation rdf:type sosa:Observation ; sosa:hasResult ?quantity . OPTIONAL{ ?observation sosa:resultTime ?timestamp } . ?quantity qudt:numericValue ?value}"
+		},
+        "PLUVIOMETERSWITHWATERLEVEL": {
+			"sparql": "SELECT ?observation ?timestamp ?waterLevel FROM <http://wot.arces.unibo.it/observation/2021> WHERE {VALUES ?observation {<http://wot.arces.unibo.it/waterLevelCorreggio> <http://wot.arces.unibo.it/waterLevelSantaMaria> <http://wot.arces.unibo.it/waterLevelRotte>} ?observation rdf:type sosa:Observation ; sosa:hasResult ?quantity ; sosa:resultTime ?timestamp . ?quantity qudt:numericValue ?waterLevel }"
+		}
+	}
+}
