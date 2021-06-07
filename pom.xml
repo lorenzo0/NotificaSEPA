@@ -58,7 +58,7 @@
 							<outputDirectory>${basedir}/target/</outputDirectory>
 							<resources>
 								<resource>
-									<directory>${basedir}/resources</directory>
+									<directory>${basedir}/src/main/resources</directory>
 									<filtering>true</filtering>
 								</resource>
 							</resources>

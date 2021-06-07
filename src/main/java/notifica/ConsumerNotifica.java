@@ -1,7 +1,7 @@
 package notifica;
 
 import it.unibo.arces.wot.sepa.pattern.Consumer;
-import utils.JSAPProvider;
+import it.unibo.arces.wot.sepa.pattern.JSAP;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,7 +17,7 @@ class ConsumerNotifica extends Consumer {
 	
 	public ConsumerNotifica()
 			throws SEPAProtocolException, SEPASecurityException, SEPAPropertiesException {
-		super(new JSAPProvider().getJsap(), "PLUVIOMETERSWITHWATERLEVEL");
+		super(new JSAP("observation_pluviometer.jsap"), "PLUVIOMETERSWITHWATERLEVEL");
 	}
 
 	

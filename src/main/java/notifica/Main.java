@@ -8,13 +8,11 @@ import it.unibo.arces.wot.sepa.commons.exceptions.SEPAPropertiesException;
 import it.unibo.arces.wot.sepa.commons.exceptions.SEPAProtocolException;
 import it.unibo.arces.wot.sepa.commons.exceptions.SEPASecurityException;
 import preparation.ProducerPreparation;
-import utils.JSAPProvider;
 
 public class Main {
 	protected static final Logger logger = LogManager.getLogger();
 	
 	/* MANDATORY ENTITY */
-	static JSAPProvider jsap;
 	static AggregatorNotifica aggregator;
 	static ConsumerNotifica consumer;
 	static ProducerPreparation producerPreparation;
@@ -23,7 +21,6 @@ public class Main {
 	public static void main(String[] args) throws SEPAPropertiesException, SEPASecurityException, SEPAProtocolException, SEPABindingsException {
 		
 		/* MANDATORY ENTITY */
-		jsap = new JSAPProvider();
 		aggregator = new AggregatorNotifica();
 		consumer = new ConsumerNotifica();
 		producerPreparation = new ProducerPreparation();

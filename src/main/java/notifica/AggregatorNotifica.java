@@ -1,7 +1,7 @@
 package notifica;
 
 import it.unibo.arces.wot.sepa.pattern.Aggregator;
-import utils.JSAPProvider;
+import it.unibo.arces.wot.sepa.pattern.JSAP;
 import utils.Pluviometer;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ class AggregatorNotifica extends Aggregator {
 	
 	public AggregatorNotifica()
 			throws SEPAProtocolException, SEPASecurityException, SEPAPropertiesException {
-		super(new JSAPProvider().getJsap(), "PLUVIOMETERS", "UPDATEWATERLEVEL");
+		super(new JSAP("observation_pluviometer.jsap"), "PLUVIOMETERS", "UPDATEWATERLEVEL");
 		
 		indexToReach=-1;
 		waterLevel=0;
