@@ -33,7 +33,7 @@ class ConsumerNotifica extends Consumer {
 		super.onAddedResults(results);
 
 		for (Bindings bindings : results.getBindings()) {
-			System.out.println("[CONSUMER] - Received new value(s): " +bindings.getValue("waterLevel") + " for: " +bindings.getValue("observation"));
+			//System.out.println("[CONSUMER] - Received new value(s): " +bindings.getValue("waterLevel") + " for: " +bindings.getValue("observation"));
 		}
 	}
 	

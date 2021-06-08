@@ -24,7 +24,6 @@ public class Main {
 	static DeleteAllProducer deleteProducer;
 	static CreatePlaceProducer createPlaceProducer;
 	static CreateObservationProducer createObsProducer;
-	static CreatePluviometerProducer createPluvProducer;
 	
 
 	public static void main(String[] args) throws SEPASecurityException, SEPAPropertiesException, SEPAProtocolException, SEPABindingsException {
@@ -39,19 +38,20 @@ public class Main {
 		deleteProducer = new DeleteAllProducer();
 		createPlaceProducer = new CreatePlaceProducer();
 		createObsProducer = new CreateObservationProducer();
-		createPluvProducer = new CreatePluviometerProducer();
 		
 		/* UTILS */
 		Random rand = new Random(); 
 		
-		preparationDB(deleteProducer, createPlaceProducer, createObsProducer, createPluvProducer);
+		preparationDB(deleteProducer, createPlaceProducer, createObsProducer);
 		populationSystem(aggregator, consumer);
+		System.out.println("\n");
 		
 		do {
 			try {
-				producer.sendValue("http://valorePluv1", Integer.toString(rand.nextInt(40)));
-				producer.sendValue("http://valorePluv2", Integer.toString(rand.nextInt(40)));
-				producer.sendValue("http://valorePluv3", Integer.toString(rand.nextInt(40)));
+				producer.sendValue("http://swamp-project.org/observation/cbec/013-R24H", Integer.toString(rand.nextInt(10)));
+				producer.sendValue("http://swamp-project.org/observation/cbec/003-R24H", Integer.toString(rand.nextInt(10)));
+				producer.sendValue("http://swamp-project.org/observation/cbec/005-R24H", Integer.toString(rand.nextInt(10)));
+				System.out.println("\n");
 				Thread.sleep(10000);
 			} catch (InterruptedException e1) {
 				return;
@@ -61,23 +61,23 @@ public class Main {
 		
 	}
 	
-	static void preparationDB(DeleteAllProducer DA, CreatePlaceProducer CPP, CreateObservationProducer COP, CreatePluviometerProducer CPLP) {
+	static void preparationDB(DeleteAllProducer DA, CreatePlaceProducer CPP, CreateObservationProducer COP) {
 		DA.deleteObservationAlreadyExisting();
 		
 		/* Creating features of interest */
-		CPP.createPlace("0.1", "0.2", "place1", "http://place1");
-		CPP.createPlace("0.2", "0.3", "place2", "http://place2");
-		CPP.createPlace("0.3", "0.4", "place3", "http://place3");
-		
-		/* Creating value of pluviometers linked to the features of interests */
-		COP.createObservation("http://place1", "http://valorePluv1", "unit:DegreeCelsius", "-1");
-		COP.createObservation("http://place2", "http://valorePluv2", "unit:DegreeCelsius", "-1");
-		COP.createObservation("http://place3", "http://valorePluv3", "unit:DegreeCelsius", "-1");
+		CPP.createPlace("0.1", "0.2", "Correggio", "http://wot.arces.unibo.it/monitor#PluviometroCorreggio");
+		CPP.createPlace("0.2", "0.3", "Rotte", "http://wot.arces.unibo.it/monitor#PluviometroRotte");
+		CPP.createPlace("0.3", "0.4", "Santa Maria", "http://wot.arces.unibo.it/monitor#PluviometroSantaMaria");
 		
 		/* Creating pluviometers linked to the features of interests and to its own value*/
-		CPLP.createObservation("http://place1", "http://pluv1", "unit:DegreeCelsius", "-2");
-		CPLP.createObservation("http://place2", "http://pluv2", "unit:DegreeCelsius", "-2");
-		CPLP.createObservation("http://place3", "http://pluv3", "unit:DegreeCelsius", "-2");
+		COP.createObservation("http://swamp-project.org/observation/cbec/013-R24H", "comment", "label", "http://wot.arces.unibo.it/monitor#PluviometroCorreggio", "unit:DegreeCelsius");
+		COP.createObservation("http://swamp-project.org/observation/cbec/003-R24H", "comment", "label", "http://wot.arces.unibo.it/monitor#PluviometroRotte", "unit:DegreeCelsius");
+		COP.createObservation("http://swamp-project.org/observation/cbec/005-R24H", "comment", "label", "http://wot.arces.unibo.it/monitor#PluviometroSantaMaria", "unit:DegreeCelsius");
+		
+		/* Creating value of pluviometers linked to the features of interests */
+		COP.createObservation("http://wot.arces.unibo.it/waterLevelCorreggio", "comment", "label", "http://wot.arces.unibo.it/monitor#PluviometroCorreggio", "unit:DegreeCelsius");
+		COP.createObservation("http://wot.arces.unibo.it/waterLevelSantaMaria", "comment", "label", "http://wot.arces.unibo.it/monitor#PluviometroRotte", "unit:DegreeCelsius");
+		COP.createObservation("http://wot.arces.unibo.it/waterLevelRotte", "comment", "label", "http://wot.arces.unibo.it/monitor#PluviometroSantaMaria", "unit:DegreeCelsius");
 		
 		System.out.println("[CHECK] Database ready!");
 	}

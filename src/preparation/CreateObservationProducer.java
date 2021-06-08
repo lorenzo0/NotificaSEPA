@@ -20,9 +20,8 @@ public class CreateObservationProducer extends Producer {
 		super(new JSAPProvider().getJsap(), "ADD_OBSERVATION", new JSAPProvider().getSecurityManager());
 
 	}
-	
 
-	public boolean createObservation(String location, String observation, String unit, String value) {
+	public boolean createObservation(String observation, String comment, String label, String location, String unit) {
 		System.out.println("[CREATE OBSERVATION - PRODUCER] - Creating observation linked to features of interest...");
 
 		int retry = 5;
@@ -33,7 +32,8 @@ public class CreateObservationProducer extends Producer {
 				this.setUpdateBindingValue("location", new RDFTermURI(location));
 				this.setUpdateBindingValue("observation", new RDFTermURI(observation));
 				this.setUpdateBindingValue("unit", new RDFTermURI(unit));
-				this.setUpdateBindingValue("value", new RDFTermLiteral(value));
+				this.setUpdateBindingValue("comment", new RDFTermLiteral(comment));
+				this.setUpdateBindingValue("label", new RDFTermLiteral(label));
 				
 				ret = update().isUpdateResponse();
 			} catch (SEPASecurityException | SEPAProtocolException | SEPAPropertiesException

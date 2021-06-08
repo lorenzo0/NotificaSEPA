@@ -35,9 +35,9 @@ class AggregatorNotifica extends Aggregator {
 		waterLevel=0;
 		
 		map = new HashMap<>();
-		map.put("http://valorePluv1", "http://pluv1");
-		map.put("http://valorePluv2", "http://pluv2");
-		map.put("http://valorePluv3", "http://pluv3");
+		map.put("http://swamp-project.org/observation/cbec/013-R24H", "http://wot.arces.unibo.it/waterLevelCorreggio"); //Correggio
+		map.put("http://swamp-project.org/observation/cbec/003-R24H", "http://wot.arces.unibo.it/waterLevelSantaMaria"); //Santa Maria
+		map.put("http://swamp-project.org/observation/cbec/005-R24H", "http://wot.arces.unibo.it/waterLevelRotte"); //Rotte
 	}
 
 	
@@ -46,7 +46,7 @@ class AggregatorNotifica extends Aggregator {
 		super.onAddedResults(results);
 
 		for (Bindings bindings : results.getBindings()) {
-			System.out.println("[AGGREGATOR] - Received new value(s): " +bindings.getValue("value") + " for: " +bindings.getValue("observation"));
+			//System.out.println("[AGGREGATOR] - Received new value(s): " +bindings.getValue("value") + " for: " +bindings.getValue("observation"));
 		
 			/*logger.debug("New pluviometer data with uri: " + bindings.getValue("observation"));
 			System.out.println("Observation: " +bindings.getValue("observation"));
@@ -70,6 +70,10 @@ class AggregatorNotifica extends Aggregator {
 				waterLevel = pluviometers.get(pluviometers.indexOf(p1)).getNewWaterValue();
 			}
 			
+			if(waterLevel != -1) {
+				System.out.print(waterLevel);
+				System.out.println("\n");
+			}
 			
 			int retry = 5;
 			
