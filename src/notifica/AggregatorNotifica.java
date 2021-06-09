@@ -8,6 +8,9 @@ import utils.Pluviometer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import it.unibo.arces.wot.sepa.commons.exceptions.SEPABindingsException;
 import it.unibo.arces.wot.sepa.commons.exceptions.SEPAPropertiesException;
 import it.unibo.arces.wot.sepa.commons.exceptions.SEPAProtocolException;
@@ -20,6 +23,8 @@ import it.unibo.arces.wot.sepa.commons.sparql.RDFTermLiteral;
 import it.unibo.arces.wot.sepa.commons.sparql.RDFTermURI;
 
 class AggregatorNotifica extends Aggregator {
+	
+	protected static final Logger logger = LogManager.getLogger();
 	
 	Pluviometer p1 = null;
 	ArrayList<Pluviometer> pluviometers = new ArrayList<Pluviometer>();
@@ -46,7 +51,8 @@ class AggregatorNotifica extends Aggregator {
 		super.onAddedResults(results);
 
 		for (Bindings bindings : results.getBindings()) {
-			System.out.println("[AGGREGATOR] - Received new value(s): " +bindings.getValue("value") + " for: " +bindings.getValue("observation"));
+			logger.info("[AGGREGATOR] - Received new value(s): " +bindings.getValue("value") + " for: " +bindings.getValue("observation"));
+
 			
 			for(int i=0; i<pluviometers.size(); i++) {
 				if(pluviometers.get(i).getObservation().equals(bindings.getValue("observation")))
@@ -65,8 +71,7 @@ class AggregatorNotifica extends Aggregator {
 				waterLevel = pluviometers.get(pluviometers.indexOf(p1)).getNewWaterValue();
 			}
 			
-			//System.out.println("[SIMULATOR WATER LEVEL] - " + waterLevel + " for: " +bindings.getValue("observation") + " to: "+map.get(bindings.getValue("observation")));
-			
+			//logger.info("[SIMULATOR WATER LEVEL] - " + waterLevel + " for: " +bindings.getValue("observation") + " to: "+map.get(bindings.getValue("observation")));
 			
 			int retry = 5;
 			
@@ -82,7 +87,7 @@ class AggregatorNotifica extends Aggregator {
 			while (!ret && retry > 0) {
 				try {
 					ret = update().isUpdateResponse();
-					System.out.println("[AGGREGATOR] - Updated water level: " + Integer.toString(waterLevel) + " for " +map.get(bindings.getValue("observation")));
+					logger.info("[AGGREGATOR] - Updated water level: " + Integer.toString(waterLevel) + " for " +map.get(bindings.getValue("observation")));
 				} catch (SEPASecurityException | SEPAProtocolException | SEPAPropertiesException
 						| SEPABindingsException e) {
 					logger.error(e.getMessage());
@@ -90,7 +95,7 @@ class AggregatorNotifica extends Aggregator {
 				}
 				retry--;
 			}
-			if(!ret) System.out.println("[AGGREGATOR] - Failed updated water level(s)");
+			if(!ret) logger.info("[AGGREGATOR] - Failed updated water level(s)");
 		}
 	}
 	

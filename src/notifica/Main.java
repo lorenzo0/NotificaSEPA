@@ -1,5 +1,8 @@
 package notifica;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.Iterator;
 import java.util.Random; 
 import it.unibo.arces.wot.sepa.commons.exceptions.SEPABindingsException;
@@ -16,6 +19,8 @@ public class Main {
 	static AggregatorNotifica aggregator;
 	static ConsumerNotifica consumer;
 	static ProducerPreparation producerPreparation;
+	
+	protected static final Logger logger = LogManager.getLogger();
 	
 
 	public static void main(String[] args) throws SEPASecurityException, SEPAPropertiesException, SEPAProtocolException, SEPABindingsException {
@@ -34,6 +39,7 @@ public class Main {
 			}
 		}
 		
+
 		//subscription of aggregator and consumer
 		ConsumerNotifica test = null;
 		for (int i=0; i < args.length ; i++) {
@@ -63,11 +69,11 @@ public class Main {
 	}
 	
 	static void addingObservation(ProducerPreparation PP) {
-		PP.createObservation("http://wot.arces.unibo.it/monitor#PluviometroCorreggio", "http://wot.arces.unibo.it/waterLevelCorreggio", "unit:Number", "-1");
-		PP.createObservation("http://wot.arces.unibo.it/monitor#PluviometroRotte", "http://wot.arces.unibo.it/waterLevelRotte", "unit:Number", "-1");
-		PP.createObservation("http://wot.arces.unibo.it/monitor#PluviometroSantaMaria", "http://wot.arces.unibo.it/waterLevelSantaMaria", "unit:Number", "-1");
+		PP.createObservation("http://wot.arces.unibo.it/monitor#PluviometroCorreggio>", "http://wot.arces.unibo.it/waterLevelCorreggio", "unit:Number", "-1","013-R24H (Grado di intensità)");
+		PP.createObservation("http://wot.arces.unibo.it/monitor#PluviometroRotte", "http://wot.arces.unibo.it/waterLevelRotte", "unit:Number", "-1","005-R24H (Grado di intensità)");
+		PP.createObservation("http://wot.arces.unibo.it/monitor#PluviometroSantaMaria", "http://wot.arces.unibo.it/waterLevelSantaMaria", "unit:Number", "-1","003-R24H (Grado di intensità)");
 		
-		System.out.println("[PREPARATION] New  water level's observations created succesfully!");		
+		logger.info("[PREPARATION] New  water level's observations created succesfully!");		
 	}
 	
 }

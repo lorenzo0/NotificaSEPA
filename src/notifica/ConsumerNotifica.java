@@ -8,6 +8,9 @@ import utils.Pluviometer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import it.unibo.arces.wot.sepa.commons.exceptions.SEPABindingsException;
 import it.unibo.arces.wot.sepa.commons.exceptions.SEPAPropertiesException;
 import it.unibo.arces.wot.sepa.commons.exceptions.SEPAProtocolException;
@@ -21,6 +24,8 @@ import it.unibo.arces.wot.sepa.commons.sparql.RDFTermURI;
 
 class ConsumerNotifica extends Consumer {
 	
+	protected static final Logger logger = LogManager.getLogger();
+	
 	
 	public ConsumerNotifica()
 			throws SEPAProtocolException, SEPASecurityException, SEPAPropertiesException {
@@ -33,7 +38,7 @@ class ConsumerNotifica extends Consumer {
 		super.onAddedResults(results);
 
 		for (Bindings bindings : results.getBindings()) {
-			System.out.println("[CONSUMER] - Received new value(s): " +bindings.getValue("waterLevel") + " for: " +bindings.getValue("observation"));
+			logger.info("[CONSUMER] - Received new value(s): " +bindings.getValue("waterLevel") + " for: " +bindings.getValue("observation"));
 		}
 	}
 	
